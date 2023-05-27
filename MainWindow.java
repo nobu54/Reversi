@@ -17,12 +17,14 @@ import javax.swing.AbstractButton;
 ・自分の色　黒（先手） or 白（後手）　（radiogroup radiobutton デフォは1pが黒）
 */
 
-
 /*
 雑記
 Window.javaを作ってそれを継承していった方がいいかなぁと思いました。
 */
 public class MainWindow{
+  private Player p1;
+  private Player p2;
+
   public MainWindow() {
     JFrame f = new JFrame();
     BoxLayout boxlayout = new BoxLayout(f.getContentPane(),BoxLayout.X_AXIS);
@@ -78,9 +80,28 @@ public class MainWindow{
       @Override
       public void actionPerformed(ActionEvent e) {
         String opponent = getSelectedButtonText(bgroupOpponent);
-        String myCcolor = getSelectedButtonText(bgroupSelectColor);
+        String myColor = getSelectedButtonText(bgroupSelectColor);
         boolean isHighlight = highlight.isSelected();
-        GameWindow gw = new GameWindow();
+        
+        int p1color = 0;
+        int p2color = 1;
+        boolean isCom = true;
+        if (myColor.equals("黒")) {
+            p1color = 0;
+            p2color = 1;
+        } else if (myColor.equals("白")) {
+            p1color = 1;
+            p2color = 0;
+        }
+        if (opponent.equals("1p vs CPU")) {
+            isCom = true;
+        } else if (opponent.equals("1p vs 2p")){
+            isCom = true;
+        }
+        p1 = new Player(false, p1color);
+        p2 = new Player(isCom, p2color);
+        System.out.println(opponent);
+        GameWindow gw = new GameWindow(p1, p2, isHighlight);
         f.dispose();
         // gs.start();
       }

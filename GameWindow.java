@@ -10,12 +10,23 @@ public class GameWindow extends JFrame  {
 
   Board board;
   Rule rule;
+  Player p1;
+  Player p2;
+  boolean highlight;
 
-  public GameWindow() {
+  public GameWindow(Player p1, Player p2, boolean highlight) {
+    // Playerの初期化
+    this.p1 = p1;
+    this.p2 = p2;
+    this.highlight = highlight;
 
-    // 盤とルールの生成
+    // 初手が1pか2pか
+    int turn = 1;
+    if (p2.getColor() == 0) turn = 2;
+
+    // 盤とルールの初期化
+    this.rule = new Rule(turn);
     this.board = new Board();
-    this.rule = new Rule();
 
     // windowの作成
     setTitle("オセロ");
@@ -99,12 +110,13 @@ public class GameWindow extends JFrame  {
         int posx = (x-72) / 80;
         int posy = (y-50) / 80 ;
         // ルールのチェック
-        // int[][][] place = rule.canPlacing(board.getBoard(), posx, posy);
-        // for (int i = 0; )
-        // System.out.println(Arrays.deepToString(place));
         System.out.println(rule.turnPlace(board.getBoard(), posx, posy));
-
         // boardへ置く処理
+        if (rule.getTurn() == 1) {
+            rule.put(board.getBoard(), p1.getColor(), posx, posy);
+        } else if (rule.getTurn() == 2) {
+            rule.put(board.getBoard(), p2.getColor(), posx,posy);
+        }
       }
       
     }
