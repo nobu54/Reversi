@@ -4,6 +4,8 @@ public class Board {
   /*
   黒-->0
   白-->1
+  board[y][x]
+  y-->
   */
   private int[][] board;
 
@@ -21,6 +23,14 @@ public class Board {
     this.board[5][5] = 1; // 右下
     this.board[4][5] = 0; // 左下
     this.board[5][4] = 0; // 右上
+  }
+  
+  public void changeBoard(int y, int x, int color){
+    System.out.println(y);
+    System.out.println(x);
+    // y++;
+    // x++;
+    this.board[y][x] = color;
   }
 
   public int[][] getBoard() {
