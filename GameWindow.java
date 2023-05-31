@@ -118,8 +118,10 @@ public class GameWindow extends JFrame  {
             
             if (rule.getTurn() == 1) {
                 rule.put(board, p1.getColor(), posy, posx);
+                rule.setTurn(2);
             } else if (rule.getTurn() == 2) {
                 rule.put(board, p2.getColor(), posy, posx);
+                rule.setTurn(1);
             }
             
         }

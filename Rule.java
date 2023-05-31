@@ -84,12 +84,17 @@ public class Rule{
             int[] place = toIntPlace(pl);
             board.changeBoard(place[1], place[0], color);
         }
+
         cui.printBoard(board.getBoard());
     }
 
 	public int getTurn() {
 		return this.turn;
 	}
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
 
 }
 
