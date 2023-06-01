@@ -47,10 +47,10 @@ public class GameWindow extends JFrame  {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        paintLine(g);
+        drowBoard(g);
     }
 
-    void paintLine(Graphics g) {
+    private void drowBoard(Graphics g) {
         g.drawLine(80, 80, 80, 720);
         g.drawLine(160, 80, 160, 720);
         g.drawLine(240, 80, 240, 720);
@@ -59,7 +59,7 @@ public class GameWindow extends JFrame  {
         g.drawLine(480, 80, 480, 720);
         g.drawLine(560, 80, 560, 720);
         g.drawLine(640, 80, 640, 720);
-            g.drawLine(720, 80, 720, 720);
+        g.drawLine(720, 80, 720, 720);
         g.drawLine(80, 80, 720, 80);
         g.drawLine(80, 160, 720, 160);
         g.drawLine(80, 240, 720, 240);
@@ -69,13 +69,18 @@ public class GameWindow extends JFrame  {
         g.drawLine(80, 560, 720, 560);
         g.drawLine(80, 640, 720, 640);
         g.drawLine(80, 720, 720, 720);
-        paintWhite(g, getHeigth(4), getWidth("D"));
-        paintWhite(g, getHeigth(5), getWidth("E"));
-        paintBlack(g, getHeigth(5), getWidth("D"));
-        paintBlack(g, getHeigth(4), getWidth("E"));
+        
+        int b[][] = board.getBoard();
+        for (int i = 1; i < 9; i++) {
+            for (int r = 0; r < 9; r++) {
+                if (b[r][i] != -1) {
+                    paintPiece(g, getWidth(r), getHeight(i), b[r][i]);
+                }
+            }
+        }
     }
 
-    int getHeigth(int position) {
+    int getHeight(int position) {
         return 10 + 80 * position;
     }
 
@@ -85,18 +90,16 @@ public class GameWindow extends JFrame  {
         int position = str.indexOf(positionStr) + 1;
         return 10 + 80 * position;
     }
-
-    void paintWhite(Graphics g, int x, int y) {
-        int width = 60;
-        int height = 60;
-        g.setColor(Color.WHITE);
-        g.fillOval(x, y, width, height);
+    int getWidth(int position) {
+        return 10 + 80 * position;
     }
-
-    void paintBlack(Graphics g, int x, int y) {
+    
+    private void paintPiece(Graphics g, int y, int x, int color) {
         int width = 60;
         int height = 60;
-        g.setColor(Color.BLACK);
+        if (color == 0) g.setColor(Color.BLACK);
+        else if (color == 1) g.setColor(Color.WHITE);
+        else g.setColor(Color.RED);
         g.fillOval(x, y, width, height);
     }
 
@@ -123,7 +126,7 @@ public class GameWindow extends JFrame  {
                 rule.put(board, p2.getColor(), posy, posx);
                 rule.setTurn(1);
             }
-            
+            repaint();
         }
     }
 
