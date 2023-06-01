@@ -26,10 +26,6 @@ public class Board {
   }
   
   public void changeBoard(int y, int x, int color){
-    System.out.println(y);
-    System.out.println(x);
-    // y++;
-    // x++;
     this.board[y][x] = color;
   }
 

@@ -21,7 +21,6 @@ public class Rule{
 	}
 
     private int[] toIntPlace(String place){
-        System.out.println("place" + place);
         String x = String.valueOf("ABCDEFGH".indexOf(place.charAt(0)));
         String y = String.valueOf(place.charAt(1));
         int[] xy = {Integer.parseInt(x) + 1, Integer.parseInt(y) };
@@ -30,10 +29,7 @@ public class Rule{
 
 	public String turnPlace(int[][] board, int posy, int posx, int color){
 		String place = "";
-		// posx++;
-		// posy++;
-        System.out.println("posx:" + posx + "  posy:" + posy + "color:" + board[posy][posx]);
-		if (board[posy][posx] != -1) return place + "既に石が置いてある";
+		if (board[posy][posx] != -1) return place;
         
         String p = "";
 		// 上下左右斜めでおける場所があるか
@@ -67,25 +63,22 @@ public class Rule{
 		return place;
 	}
 
-    public void put(Board board, int color, int y, int x){
+    public boolean put(Board board, int color, int y, int x){
         
         String[] placeList = turnPlace(board.getBoard(), y, x, color).split(",");
-
-        // System.out.println("y: " + y + "--x: " + x);
-        // System.out.println(turnPlace(board.getBoard(), y, x, color));
+        if (placeList[0].length() < 2) {
+            return false;
+        }  
         // ボードに駒を置く
         board.changeBoard(y, x, color);
-        Cui cui = new Cui();
-        cui.printBoard(board.getBoard());
         
         // 置いたことにより他の駒をひっくり返す
         for (String pl : placeList) {
-            // System.out.println(pl+ "loop");
             int[] place = toIntPlace(pl);
             board.changeBoard(place[1], place[0], color);
         }
+        return true;
 
-        cui.printBoard(board.getBoard());
     }
 
 	public int getTurn() {
