@@ -113,14 +113,22 @@ public class GameWindow extends JFrame  {
             int posy = (y-50) / 80 ;
             posx++;
             posy++;
-            // ルールのチェック
-            // System.out.println(rule.turnPlace(board.getBoard(), posy, posx));
-            // boardへ置く処理
             
+            // boardへ置く処理
             if (rule.getTurn() == 1) {
-                if (rule.put(board, p1.getColor(), posy, posx)) rule.setTurn(2);
+                // 指定した場所がおける場所かどうか、置けるなら置く
+                if (rule.put(board, p1.getColor(), posy, posx)) { 
+                    // 相手が置けるかどうか。置ける場合ターンを相手に移す
+                    if (rule.canPlace(board.getBoard(), p2.getColor())) {
+                        rule.setTurn(2);
+                    }
+                }
             } else if (rule.getTurn() == 2) {
-                if (rule.put(board, p2.getColor(), posy, posx)) rule.setTurn(1);
+                if (rule.put(board, p2.getColor(), posy, posx)) {
+                    if (rule.canPlace(board.getBoard(), p1.getColor())) {
+                        rule.setTurn(1);
+                    }
+                }
             }
             repaint();
         }

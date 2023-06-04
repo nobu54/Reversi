@@ -64,7 +64,6 @@ public class Rule{
 	}
 
     public boolean put(Board board, int color, int y, int x){
-        
         String[] placeList = turnPlace(board.getBoard(), y, x, color).split(",");
         if (placeList[0].length() < 2) {
             return false;
@@ -78,7 +77,18 @@ public class Rule{
             board.changeBoard(place[1], place[0], color);
         }
         return true;
+    }
 
+    public boolean canPlace(int[][] board, int color) {
+        for (int i = 1; i < 9; i++) {
+            for (int r = 1; r < 9; r++) {
+                String[] placeList = turnPlace(board, r, i, color).split(",");
+                if (placeList[0].length() > 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 	public int getTurn() {
