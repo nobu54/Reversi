@@ -13,6 +13,7 @@ public class GameWindow extends JFrame  {
     Player p1;
     Player p2;
     boolean highlight;
+    ResultWindow rw;
 
     public GameWindow(Player p1, Player p2, boolean highlight) {
         // Playerの初期化
@@ -110,7 +111,7 @@ public class GameWindow extends JFrame  {
         int y = e.getY();
         if (x > 72 && x < 712 && y > 50 && y < 690) {
             int posx = (x-72) / 80;
-            int posy = (y-50) / 80 ;
+            int posy = (y-50) / 80;
             posx++;
             posy++;
             
@@ -121,12 +122,21 @@ public class GameWindow extends JFrame  {
                     // 相手が置けるかどうか。置ける場合ターンを相手に移す
                     if (rule.canPlace(board.getBoard(), p2.getColor())) {
                         rule.setTurn(2);
+                    } else {
+                        // 自分も置けない場合試合終了
+                        if (!(rule.canPlace(board.getBoard(), p1.getColor()))) {
+                            rw = new ResultWindow(p1, p2, board);
+                        }
                     }
                 }
             } else if (rule.getTurn() == 2) {
                 if (rule.put(board, p2.getColor(), posy, posx)) {
                     if (rule.canPlace(board.getBoard(), p1.getColor())) {
                         rule.setTurn(1);
+                    } else {
+                        if (!(rule.canPlace(board.getBoard(), p2.getColor()))) {
+                            rw = new ResultWindow(p1, p2, board);
+                        }
                     }
                 }
             }

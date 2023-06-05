@@ -29,6 +29,16 @@ public class Board {
     this.board[y][x] = color;
   }
 
+  public int countPiece(int color) {
+    int count = 0;
+    for (int i = 0; i < 9; i++) {
+        for (int r = 0; r < 9; r++) {
+            if (this.board[r][i] == color) count++;
+        }
+    }
+    return count;
+  }
+
   public int[][] getBoard() {
     return this.board;
   }

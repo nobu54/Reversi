@@ -20,4 +20,9 @@ public class Player {
     public int getColor(){
         return this.color;
     }
+
+    public String getStringColor() {
+        if (this.color == 0) return "黒";
+        return "白";
+    }
 }
