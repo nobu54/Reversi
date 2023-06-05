@@ -96,7 +96,7 @@ public class MainWindow{
         if (opponent.equals("1p vs CPU")) {
             isCom = true;
         } else if (opponent.equals("1p vs 2p")){
-            isCom = true;
+            isCom = false;
         }
         p1 = new Player(false, p1color);
         p2 = new Player(isCom, p2color);

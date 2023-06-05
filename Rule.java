@@ -20,7 +20,7 @@ public class Rule{
 		return "ABCDEFGH".charAt(x-1) + String.valueOf(y);
 	}
 
-    private int[] toIntPlace(String place){
+    public int[] toIntPlace(String place){
         String x = String.valueOf("ABCDEFGH".indexOf(place.charAt(0)));
         String y = String.valueOf(place.charAt(1));
         int[] xy = {Integer.parseInt(x) + 1, Integer.parseInt(y) };
@@ -79,16 +79,17 @@ public class Rule{
         return true;
     }
 
-    public boolean canPlace(int[][] board, int color) {
+    public String canPlace(int[][] board, int color) {
+        String place = "";
         for (int i = 1; i < 9; i++) {
             for (int r = 1; r < 9; r++) {
                 String[] placeList = turnPlace(board, r, i, color).split(",");
                 if (placeList[0].length() > 1) {
-                    return true;
+                    place += toStringPlace(r, i) + ",";
                 }
             }
         }
-        return false;
+        return place;
     }
 
 	public int getTurn() {

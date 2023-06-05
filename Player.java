@@ -13,7 +13,7 @@ public class Player {
     }
 
 
-    public boolean getIsCompter(){
+    public boolean getIsComputer() {
         return this.isComputer;
     }
 
