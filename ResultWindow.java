@@ -23,11 +23,9 @@ public class ResultWindow {
         f.setTitle("result");
         f.setSize(400, 400);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // f.getContentPane().setBackground(Color.GRAY);
 
         JPanel winnerPanel = new JPanel();
         winnerPanel.setLayout(new BoxLayout(winnerPanel, BoxLayout.Y_AXIS));
-        // winnerPanel.setBackground(Color.GRAY);
         JPanel playerPanel = new JPanel();
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.X_AXIS));
         JLabel winLabel = new JLabel(winner);
