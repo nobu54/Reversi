@@ -1,8 +1,22 @@
+/**
+* プレイヤーに関するクラス
+* @parm isComputer コンピュータであるかどうか
+* @parm color playerの色
+*/
 public class Player {
 
+    /** プレイヤーがコンピュータであるかどうかを保持する変数
+    * コンピュータである場合はTrue,そうで無い場合はfalse
+    */
     private boolean isComputer;
+
+    /** プレイヤーの色を保持する変数
+    * プロイヤーが黒である場合は0
+    * プレイヤーが白である場合は1
+    */
     private int color;
     
+    /** コンストラクタ*/
     Player(boolean ic, int c) {
         if (c == 0 || c == 1){
             this.color = c;
@@ -12,15 +26,23 @@ public class Player {
         this.isComputer = ic;
     }
 
-
+    /** isComputerのゲッター
+    * @return isComputer
+    */
     public boolean getIsComputer() {
         return this.isComputer;
     }
 
+    /** colorのゲッター
+    * @return color
+    */
     public int getColor(){
         return this.color;
     }
 
+    /** colorをString型で返すメソッド
+    * @return "黒"、又は"白"を返す
+    */
     public String getStringColor() {
         if (this.color == 0) return "黒";
         return "白";
