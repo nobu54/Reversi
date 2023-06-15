@@ -1,9 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * リザルトを表示を作成するクラス
+ */
 public class ResultWindow {
 
+    /**
+     * リザルトを表示するウィンドウを生成するクラス
+     * @param p1 Player1のインスタンス
+     * @param p2 Player2のインスタンス
+     * @param board boardのインスタンス
+     */
     public ResultWindow(Player p1, Player p2, Board board) {
 
         // テキスト生成

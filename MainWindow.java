@@ -4,21 +4,23 @@ import java.awt.event.*;
 import java.util.Enumeration;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-/*
-このウィンドウで決めること
-・対戦相手 1p vs CPU or 1p vs 2p (radiogoup radioButton。デフォは1p vs cpu)
-・置ける場所のハイライトのon off　（チェックボックス。チェックを入れるとon。デフォでonが良いかな）
-・自分の色　黒（先手） or 白（後手）　（radiogroup radiobutton デフォは1pが黒）
-*/
 
-/*
-雑記
-Window.javaを作ってそれを継承していった方がいいかなぁと思いました。
+/**
+* このウィンドウでは、ゲームを始める際の設定を決める
+* 設定内容：CPU戦かPVPか,自分の色,置ける場所をハイライトするか否か
+* 対戦相手 1p vs CPU or 1p vs 2p (radiogoup radioButton。デフォは1p vs cpu)
+* 自分の色　黒（先手） or 白（後手）　（radiogroup radiobutton デフォは1pが黒）
+* 置ける場所のハイライトのon off　（チェックボックス。チェックを入れるとon。デフォでonが良いかな）
+* @parm p1 Player1
+* @parm p2 Player2
 */
 public class MainWindow{
     private Player p1;
     private Player p2;
 
+    /**
+     * ウィンドウの作成
+     */
     public MainWindow() {
         JFrame f = new JFrame();
         BoxLayout boxlayout = new BoxLayout(f.getContentPane(),BoxLayout.X_AXIS);
@@ -102,6 +104,11 @@ public class MainWindow{
         f.setVisible(true);
     }
 
+    /**
+     * ラジオボタンで選択されているボタンのテキストを取得するメソッド 
+     * @param buttonGroup ラジオボタンのグループ
+     * @return ボタンのテキスト
+     */
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();

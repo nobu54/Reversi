@@ -2,8 +2,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
+/**
+ * ゲーム画面を生成するクラス
+ * @parm board ボード情報
+ * @parm rule ルール
+ * @parm p1 Player1
+ * @parm p2 Player2
+ * @parm highlight 置ける場所のハイライトの有無
+ * @parm rw リザルトウィンドウ
+ * @parm ai コンピューター
+ */
 public class GameWindow extends JFrame  {
 
     Board board;
@@ -14,6 +23,12 @@ public class GameWindow extends JFrame  {
     ResultWindow rw;
     Ai ai;
 
+    /**
+     * ゲームウィンドウを生成するメソッド
+     * @param p1 Player1
+     * @param p2 Player2
+     * @param highlight ハイライトの有無
+     */
     public GameWindow(Player p1, Player p2, boolean highlight) {
         // Playerの初期化
         this.p1 = p1;
@@ -45,16 +60,16 @@ public class GameWindow extends JFrame  {
         setVisible(true);
     }
 
-    public void start() {
-        System.out.println("start!!!");
-    }
-
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         drowBoard(g);
     }
 
+    /**
+     * ボードを描画し、board情報に基づき駒を描画するメソッド
+     * @param g Graphics
+     */
     private void drowBoard(Graphics g) {
         g.drawLine(80, 80, 80, 720);
         g.drawLine(160, 80, 160, 720);
@@ -85,20 +100,43 @@ public class GameWindow extends JFrame  {
         }
     }
 
+    /**
+     * y軸の座標を受け取り、その座標がウィンドウ中ではどの位置になるかを計算して返すメソッド
+     * @param position y軸(縦)。1～8
+     * @return ウィンドウ中での位置(y軸のみ)
+     */
     int getHeight(int position) {
         return 10 + 80 * position;
     }
 
     // getHorizoneの方がいいかも？
+    /**
+     * アルファベットでx軸を受け取り、その座標がウィンドウ中ではどの位置になるかを計算して返すメソッド
+     * @param positionStr x軸。A～H
+     * @return ウィンドウ中での位置(x軸のみ)
+     */
     int getWidth(String positionStr) {
         String str = "ABCDEFGH";
         int position = str.indexOf(positionStr) + 1;
         return 10 + 80 * position;
     }
+
+    /**
+     * 数値でx軸を受け取り、その座標がウィンドウ中ではどの位置になるかを計算して返すメソッド
+     * @param position x軸。1～8
+     * @return ウィンドウ中での位置(x軸のみ)
+     */
     int getWidth(int position) {
         return 10 + 80 * position;
     }
-    
+   
+    /**
+     * 駒を盤面に描画するメソッド
+     * @param g Graphics
+     * @param y y軸。ウィンドウの中でのposition。1～8の座標で指定ではない
+     * @param x x軸。ウィンドウの中でのposition。A～Hの座標で指定ではない
+     * @param color 色
+     */
     private void paintPiece(Graphics g, int y, int x, int color) {
         int width = 60;
         int height = 60;
@@ -108,6 +146,10 @@ public class GameWindow extends JFrame  {
         g.fillOval(x, y, width, height);
     }
 
+    /**
+     * マウスを右クリックした時に呼ばれる処理
+     * 駒を置きたいときにマウスクリックを行う
+     */
     class MyMouseListener implements MouseListener {
         public void mouseClicked(MouseEvent e) {
         // 位置を取得
@@ -122,6 +164,11 @@ public class GameWindow extends JFrame  {
         }
     }
 
+    /**
+     * 駒を置き、置いた後にターンを相手に移すメソッド
+     * @param posy y軸。1～8
+     * @param posx x軸。1～8
+     */
     private void pvp(int posy, int posx) {
         // boardへ置く処理
         if (rule.getTurn() == 1) {
