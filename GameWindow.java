@@ -71,6 +71,7 @@ public class GameWindow extends JFrame  {
      * @param g Graphics
      */
     private void drowBoard(Graphics g) {
+        // ボードを描画
         g.drawLine(80, 80, 80, 720);
         g.drawLine(160, 80, 160, 720);
         g.drawLine(240, 80, 240, 720);
@@ -89,7 +90,8 @@ public class GameWindow extends JFrame  {
         g.drawLine(80, 560, 720, 560);
         g.drawLine(80, 640, 720, 640);
         g.drawLine(80, 720, 720, 720);
-        
+       
+        // 駒を描画
         int b[][] = board.getBoard();
         for (int i = 1; i < 9; i++) {
             for (int r = 0; r < 9; r++) {
@@ -98,6 +100,37 @@ public class GameWindow extends JFrame  {
                 }
             }
         }
+
+        // ハイライトを描画
+        if (highlight) {
+            String[] hlplace;
+            if (rule.getTurn() == 1) {
+                hlplace = rule.canPlace(board.getBoard(), p1.getColor()).split(",");
+            } else {
+                hlplace = rule.canPlace(board.getBoard(), p2.getColor()).split(",");
+            }
+
+            for (String hlp: hlplace) {
+                int[] h = common.toIntPlace(hlp);
+                paintHighLight(g, getHeight(h[1]), getWidth(h[0]));
+            }
+
+        }
+    }
+
+    /**
+     * ハイライトを描画するメソッド
+     * @param g Graphcs
+     * @param y y軸
+     * @param x x軸
+     */
+    private void paintHighLight(Graphics g, int y, int x) {
+       int width = 20;
+       int height = 20;
+       x += 20;
+       y += 20;
+       g.setColor(Color.RED);
+       g.fillOval(x, y, width, height); 
     }
 
     /**

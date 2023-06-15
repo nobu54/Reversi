@@ -38,11 +38,11 @@ public class Rule{
         return "ABCDEFGH".charAt(x-1) + String.valueOf(y);
     }
 
-    /**
-     * 盤面の座標をString型で受け取り、int[]型に変換して返すメソッド
-     * @param place boardの座標をA1～H8で表した値
-     * @return xy[0]はx座標。xy[1]はy座標
-     */
+       
+                                           
+                                       
+                                  
+       
     public int[] toIntPlace(String place){
         String x = String.valueOf("ABCDEFGH".indexOf(place.charAt(0)));
         String y = String.valueOf(place.charAt(1));
