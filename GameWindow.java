@@ -111,7 +111,7 @@ public class GameWindow extends JFrame  {
             }
 
             for (String hlp: hlplace) {
-                int[] h = common.toIntPlace(hlp);
+                int[] h = Common.toIntPlace(hlp);
                 paintHighLight(g, getHeight(h[1]), getWidth(h[0]));
             }
 

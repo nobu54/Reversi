@@ -18,16 +18,6 @@ public class Rule{
     }
 
     /**
-     * 盤面の座標ぞint[]型で受け取り、String型に変換して返すメソッド
-     * @param place ボードの配置を配列の[0]と[1]に入れたもの
-     * @return A1～A8を返す
-     */
-    private String toStringPlace(int[] place){
-        // int[]型で受け取った座標をString型にして返す
-        return "ABCDEFGH".charAt(place[0]-1) + String.valueOf(place[1]);
-    }
-
-    /**
      * 盤面の座標x,y(int型)を受け取り、String型に変換して返すメソッド
      * @param y boardのy座標
      * @param x boardのx座標
@@ -36,18 +26,6 @@ public class Rule{
     private String toStringPlace(int y, int x){
         // int[]型で受け取った座標をString型にして返す
         return "ABCDEFGH".charAt(x-1) + String.valueOf(y);
-    }
-
-       
-                                           
-                                       
-                                  
-       
-    public int[] toIntPlace(String place){
-        String x = String.valueOf("ABCDEFGH".indexOf(place.charAt(0)));
-        String y = String.valueOf(place.charAt(1));
-        int[] xy = {Integer.parseInt(x) + 1, Integer.parseInt(y) };
-        return xy;
     }
 
     /**
@@ -113,7 +91,7 @@ public class Rule{
         
         // 置いたことにより他の駒をひっくり返す
         for (String pl : placeList) {
-            int[] place = toIntPlace(pl);
+            int[] place = Common.toIntPlace(pl);
             board.changeBoard(place[1], place[0], color);
         }
         return true;

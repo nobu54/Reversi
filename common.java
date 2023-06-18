@@ -1,7 +1,7 @@
 /**
  * どこのクラスにも所属しない処理をまとめたクラス
  */
-public class common {
+public class Common {
 
     /**
      * 盤面の座標x,y(int型)を受け取り、String型に変換して返すメソッド
@@ -24,6 +24,32 @@ public class common {
         String y = String.valueOf(place.charAt(1));
         int[] xy = {Integer.parseInt(x) + 1, Integer.parseInt(y) };
         return xy;
+    }
+
+    /**
+     * colorをString型で返すメソッド
+     * @param color 0又は1
+     * @return "黒"、又は"白"を返す
+     */
+    static String getStringColor(int color) {
+        if (color == 0) return "黒";
+        return "白"; 
+    }
+
+    /**
+    * 盤面に置かれたコマの数を数えるメソッド
+    * @parm board 盤面の状態
+    * @parm color カウントする色
+    * @return 駒の数
+    */
+    static int countPiece(int[][] board, int color) {
+        int count = 0;
+        for (int i = 0; i < 9; i++) {
+            for (int r = 0; r < 9; r++) {
+                if (board[r][i] == color) count++;
+            }
+        }
+        return count;
     }
 
 }

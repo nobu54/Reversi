@@ -31,7 +31,7 @@ public class Ai {
         // 置く場所を決定(今回はランダム)
         Random r = new Random();
         String s = canPutList[r.nextInt(canPutList.length)];
-        int[] put = rule.toIntPlace(s);
+        int[] put = Common.toIntPlace(s);
         
         // 置く処理
         rule.put(board, color, put[1], put[0]);

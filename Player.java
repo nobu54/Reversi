@@ -39,12 +39,4 @@ public class Player {
     public int getColor(){
         return this.color;
     }
-
-    /** colorをString型で返すメソッド
-    * @return "黒"、又は"白"を返す
-    */
-    public String getStringColor() {
-        if (this.color == 0) return "黒";
-        return "白";
-    }
 }

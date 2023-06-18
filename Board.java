@@ -43,20 +43,6 @@ public class Board {
         this.board[y][x] = color;
     }
 
-    /**
-    * 盤面に置かれたコマの数を数えるメソッド
-    * @parm color カウントする色
-    */
-    public int countPiece(int color) {
-        int count = 0;
-        for (int i = 0; i < 9; i++) {
-            for (int r = 0; r < 9; r++) {
-                if (this.board[r][i] == color) count++;
-            }
-        }
-        return count;
-    }
-
     /** 盤面のゲッター */
     public int[][] getBoard() {
         return this.board;

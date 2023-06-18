@@ -15,14 +15,14 @@ public class ResultWindow {
     public ResultWindow(Player p1, Player p2, Board board) {
 
         // テキスト生成
-        int p1count = board.countPiece(p1.getColor());
-        int p2count = board.countPiece(p2.getColor());
+        int p1count = Common.countPiece(board.getBoard(), p1.getColor());
+        int p2count = Common.countPiece(board.getBoard(), p2.getColor());
         String winner = "";
         if (p1count > p2count) winner = "Player1の勝利！";
         else if (p1count < p2count ) winner = "Player2の勝利！";
         else if (p1count == p2count) winner = "drow！";
-        String p1info = "Player1(" + p1.getStringColor() + "):" + p1count + "    ";
-        String p2info = "Player2(" + p2.getStringColor() + "):" + p2count;
+        String p1info = "Player1(" + Common.getStringColor(p1.getColor()) + "):" + p1count + "    ";
+        String p2info = "Player2(" + Common.getStringColor(p2.getColor()) + "):" + p2count;
 
 
         JFrame f = new JFrame();
