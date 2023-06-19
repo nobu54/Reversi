@@ -26,11 +26,11 @@ public class Board {
             this.board[i][j] = -1;
           }
         }
-    // 初期配置のセッティング
-    this.board[4][4] = 1; // 左上
-    this.board[5][5] = 1; // 右下
-    this.board[4][5] = 0; // 左下
-    this.board[5][4] = 0; // 右上
+        // 初期配置のセッティング
+        this.board[4][4] = 1; // 左上
+        this.board[5][5] = 1; // 右下
+        this.board[4][5] = 0; // 左下
+        this.board[5][4] = 0; // 右上
     }
 
     /**

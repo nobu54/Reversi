@@ -23,10 +23,10 @@ public class Ai {
     * @parm board
     * @parm rule
     */
-    public void put(Board board, Rule rule) {
+    public void put(Board board) {
         
         // 置ける場所を取得
-        String[] canPutList = rule.canPlace(board.getBoard(), this.color).split(",");
+        String[] canPutList = Rule.canPlace(board.getBoard(), this.color).split(",");
 
         // 置く場所を決定(今回はランダム)
         Random r = new Random();
@@ -34,7 +34,7 @@ public class Ai {
         int[] put = Common.toIntPlace(s);
         
         // 置く処理
-        rule.put(board, color, put[1], put[0]);
+        Rule.put(board, color, put[1], put[0]);
 
 
     }

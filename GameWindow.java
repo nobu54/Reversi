@@ -16,7 +16,6 @@ import java.awt.event.*;
 public class GameWindow extends JFrame  {
 
     Board board;
-    Rule rule;
     Player p1;
     Player p2;
     boolean highlight;
@@ -41,9 +40,10 @@ public class GameWindow extends JFrame  {
         int turn = 1;
         if (p2.getColor() == 0) turn = 2;
 
+
         // 盤とルールの初期化
-        this.rule = new Rule(turn);
         this.board = new Board();
+        Rule.initialize(turn);
 
         // 相手がプレイヤー化コンピュータか
         ai = new Ai(0, p2.getColor());
@@ -104,10 +104,10 @@ public class GameWindow extends JFrame  {
         // ハイライトを描画
         if (highlight) {
             String[] hlplace;
-            if (rule.getTurn() == 1) {
-                hlplace = rule.canPlace(board.getBoard(), p1.getColor()).split(",");
+            if (Rule.turn == 1) {
+                hlplace = Rule.canPlace(board.getBoard(), p1.getColor()).split(",");
             } else {
-                hlplace = rule.canPlace(board.getBoard(), p2.getColor()).split(",");
+                hlplace = Rule.canPlace(board.getBoard(), p2.getColor()).split(",");
             }
 
             for (String hlp: hlplace) {
@@ -204,30 +204,30 @@ public class GameWindow extends JFrame  {
      */
     private void pvp(int posy, int posx) {
         // boardへ置く処理
-        if (rule.getTurn() == 1) {
+        if (Rule.turn == 1) {
             // 指定した場所がおける場所かどうか、置けるなら置く
-            if (rule.put(board, p1.getColor(), posy, posx)) { 
+            if (Rule.put(board, p1.getColor(), posy, posx)) { 
                 // 相手が置けるかどうか。置ける場合ターンを相手に移す
-                if (rule.canPlace(board.getBoard(), p2.getColor()).length() > 1) {
-                    rule.setTurn(2);
+                if (Rule.canPlace(board.getBoard(), p2.getColor()).length() > 1) {
+                    Rule.turn = 2;
                     // 相手がコンピュータの場合
                     if (p2.getIsComputer()) {
-                        ai.put(board, rule);
-                        rule.setTurn(1);
+                        ai.put(board);
+                        Rule.turn = 1;
                     }
                 } else {
                     // 自分も置けない場合試合終了
-                    if (rule.canPlace(board.getBoard(), p1.getColor()).length() < 2) {
+                    if (Rule.canPlace(board.getBoard(), p1.getColor()).length() < 2) {
                         rw = new ResultWindow(p1, p2, board);
                     }
                 }
             }
-        } else if (rule.getTurn() == 2) {
-            if (rule.put(board, p2.getColor(), posy, posx)) {
-                if (rule.canPlace(board.getBoard(), p1.getColor()).length() > 1) {
-                    rule.setTurn(1);
+        } else if (Rule.turn == 2) {
+            if (Rule.put(board, p2.getColor(), posy, posx)) {
+                if (Rule.canPlace(board.getBoard(), p1.getColor()).length() > 1) {
+                    Rule.turn = 1;
                 } else {
-                    if (rule.canPlace(board.getBoard(), p2.getColor()).length() < 2) {
+                    if (Rule.canPlace(board.getBoard(), p2.getColor()).length() < 2) {
                         rw = new ResultWindow(p1, p2, board);
                     }
                 }
