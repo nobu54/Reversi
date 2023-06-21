@@ -110,11 +110,19 @@ public class GameWindow extends JFrame  {
                 hlplace = Rule.canPlace(board.getBoard(), p2.getColor()).split(",");
             }
 
+            if (hlplace[0].length() == 2) {
+                for (String hlp: hlplace) {
+                    int[] h = Common.toIntPlace(hlp);
+                    paintHighLight(g, getHeight(h[1]), getWidth(h[0]));
+                }
+            }
+
+/*
             for (String hlp: hlplace) {
                 int[] h = Common.toIntPlace(hlp);
                 paintHighLight(g, getHeight(h[1]), getWidth(h[0]));
             }
-
+*/
         }
     }
 
