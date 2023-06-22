@@ -116,13 +116,6 @@ public class GameWindow extends JFrame  {
                     paintHighLight(g, getHeight(h[1]), getWidth(h[0]));
                 }
             }
-
-/*
-            for (String hlp: hlplace) {
-                int[] h = Common.toIntPlace(hlp);
-                paintHighLight(g, getHeight(h[1]), getWidth(h[0]));
-            }
-*/
         }
     }
 
@@ -201,7 +194,40 @@ public class GameWindow extends JFrame  {
             int posy = (y-50) / 80;
             posx++;
             posy++;
-            pvp(posy, posx);
+            if (p2.getIsComputer()) {
+                pvc(posy, posx);
+            } else {
+                pvp(posy, posx);
+            }
+        }
+    }
+
+    /**
+     * 2pがコンピューターの時、手番を管理する処理
+     * @param posy
+     * @param posx
+     */
+    private void pvc(int posy, int posx) {
+        // 自分が置く
+        if (Rule.put(board, p1.getColor(), posy, posx)) {
+            while (true) {
+                // 相手が置けるか
+                if (Rule.canPlace(board.getBoard(), p2.getColor()).length() > 1) {
+                    // 相手が置く
+                    ai.put(board);
+                } else {
+                    if (Rule.canPlace(board.getBoard(), p1.getColor()).length() > 1) {  // 自分が置けるか
+                        break;
+                    } else {
+                        rw = new ResultWindow(p1, p2, board);
+                        break;
+                    }
+                }
+                if (Rule.canPlace(board.getBoard(), p1.getColor()).length() > 1) {
+                    break;
+                }
+            }
+            repaint();
         }
     }
 
@@ -218,11 +244,6 @@ public class GameWindow extends JFrame  {
                 // 相手が置けるかどうか。置ける場合ターンを相手に移す
                 if (Rule.canPlace(board.getBoard(), p2.getColor()).length() > 1) {
                     Rule.turn = 2;
-                    // 相手がコンピュータの場合
-                    if (p2.getIsComputer()) {
-                        ai.put(board);
-                        Rule.turn = 1;
-                    }
                 } else {
                     // 自分も置けない場合試合終了
                     if (Rule.canPlace(board.getBoard(), p1.getColor()).length() < 2) {
